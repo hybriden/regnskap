@@ -1,0 +1,32 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+packages/
+*.nupkg
+project.lock.json
+.vs/
+
+# Node/React
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Workspace artifacts (tracked selectively)
+# _workspace/ is tracked for harness artifacts
