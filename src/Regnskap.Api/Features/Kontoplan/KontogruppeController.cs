@@ -7,7 +7,7 @@ namespace Regnskap.Api.Features.Kontoplan;
 
 [ApiController]
 [Authorize]
-[Route("api/v1/kontogrupper")]
+[Route("api/kontogrupper")]
 public class KontogruppeController : ControllerBase
 {
     private readonly IKontoplanRepository _repository;

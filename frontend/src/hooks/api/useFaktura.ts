@@ -22,10 +22,24 @@ export function useFakturaer(params?: {
   return useQuery({
     queryKey: ['fakturaer', params],
     queryFn: async () => {
-      const { data } = await apiClient.get<PagedResult<FakturaListeResponse>>('/fakturaer', {
+      const { data } = await apiClient.get<
+        | PagedResult<FakturaListeResponse>
+        | { fakturaer: FakturaListeResponse[]; totaltAntall: number; side: number; antall: number }
+      >('/fakturaer', {
         params,
       });
-      return data;
+      // Normalize: API returns {fakturaer,totaltAntall,side,antall} instead of {items,totalCount,...}
+      if ('fakturaer' in data && !('items' in data)) {
+        const raw = data as { fakturaer: FakturaListeResponse[]; totaltAntall: number; side: number; antall: number };
+        return {
+          items: raw.fakturaer,
+          totalCount: raw.totaltAntall,
+          page: raw.side,
+          pageSize: raw.antall,
+          totalPages: raw.antall > 0 ? Math.ceil(raw.totaltAntall / raw.antall) : 0,
+        } as PagedResult<FakturaListeResponse>;
+      }
+      return data as PagedResult<FakturaListeResponse>;
     },
   });
 }

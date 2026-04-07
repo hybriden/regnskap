@@ -2,7 +2,8 @@
  * Formaterer et belop i norsk format (1 234,56).
  * Negative belop vises i rodt med parentes: (1 234,56).
  */
-export function formatBelop(verdi: number): string {
+export function formatBelop(verdi: number | null | undefined): string {
+  if (verdi == null) return '0,00';
   if (verdi < 0) {
     return `(${Math.abs(verdi).toLocaleString('nb-NO', {
       minimumFractionDigits: 2,

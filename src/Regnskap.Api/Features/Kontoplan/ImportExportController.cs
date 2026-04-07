@@ -6,7 +6,7 @@ namespace Regnskap.Api.Features.Kontoplan;
 
 [ApiController]
 [Authorize]
-[Route("api/v1/kontoplan")]
+[Route("api/kontoplan")]
 public class ImportExportController : ControllerBase
 {
     private readonly IKontoplanImportExportService _importExportService;

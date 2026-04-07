@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import KontoplanPage from './pages/kontoplan/KontoplanPage';
 import KontoDetaljer from './pages/kontoplan/KontoDetaljer';
@@ -37,6 +37,23 @@ import FakturaListePage from './pages/faktura/FakturaListePage';
 import NyFakturaPage from './pages/faktura/NyFakturaPage';
 import FakturaDetaljerPage from './pages/faktura/FakturaDetaljerPage';
 import FakturaForhandsvisningPage from './pages/faktura/FakturaForhandsvisningPage';
+import RapportOversiktPage from './pages/rapportering/RapportOversiktPage';
+import ResultatregnskapPage from './pages/rapportering/ResultatregnskapPage';
+import BalansePage from './pages/rapportering/BalansePage';
+import KontantstrommPage from './pages/rapportering/KontantstrommPage';
+import RapportSaldobalansePage from './pages/rapportering/SaldobalansePage';
+import HovedbokUtskriftPage from './pages/rapportering/HovedbokUtskriftPage';
+import SaftEksportPage from './pages/rapportering/SaftEksportPage';
+import NokkeltallPage from './pages/rapportering/NokkeltallPage';
+import BudsjettPage from './pages/rapportering/BudsjettPage';
+import PeriodeavslutningPage from './pages/periodeavslutning/PeriodeavslutningPage';
+import ManedslukkeningPage from './pages/periodeavslutning/ManedslukkeningPage';
+import ArsavslutningPage from './pages/periodeavslutning/ArsavslutningPage';
+import AvskrivningPage from './pages/periodeavslutning/AvskrivningPage';
+import PeriodiseringPage from './pages/periodeavslutning/PeriodiseringPage';
+import AnleggsmiddelPage from './pages/periodeavslutning/AnleggsmiddelPage';
+import DashboardPage from './pages/DashboardPage';
+import Layout from './components/Layout';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -51,8 +68,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+        <Layout>
         <Routes>
-          <Route path="/" element={<Navigate to="/kontoplan" replace />} />
+          <Route path="/" element={<DashboardPage />} />
           <Route path="/kontoplan" element={<KontoplanPage />} />
           <Route path="/kontoplan/import" element={<KontoplanImport />} />
           <Route path="/kontoplan/:id" element={<KontoDetaljer />} />
@@ -90,7 +108,24 @@ function App() {
           <Route path="/faktura/ny" element={<NyFakturaPage />} />
           <Route path="/faktura/:id/forhandsvisning" element={<FakturaForhandsvisningPage />} />
           <Route path="/faktura/:id" element={<FakturaDetaljerPage />} />
+          <Route path="/rapporter" element={<RapportOversiktPage />} />
+          <Route path="/rapporter/resultatregnskap" element={<ResultatregnskapPage />} />
+          <Route path="/rapporter/balanse" element={<BalansePage />} />
+          <Route path="/rapporter/kontantstrom" element={<KontantstrommPage />} />
+          <Route path="/rapporter/saldobalanse" element={<RapportSaldobalansePage />} />
+          <Route path="/rapporter/hovedbokutskrift" element={<HovedbokUtskriftPage />} />
+          <Route path="/rapporter/saft" element={<SaftEksportPage />} />
+          <Route path="/rapporter/nokkeltall" element={<NokkeltallPage />} />
+          <Route path="/rapporter/budsjett" element={<BudsjettPage />} />
+          <Route path="/periodeavslutning" element={<PeriodeavslutningPage />} />
+          <Route path="/periodeavslutning/manedslukking" element={<ManedslukkeningPage />} />
+          <Route path="/periodeavslutning/arsavslutning" element={<ArsavslutningPage />} />
+          <Route path="/periodeavslutning/avskrivning" element={<AvskrivningPage />} />
+          <Route path="/periodeavslutning/periodisering" element={<PeriodiseringPage />} />
+          <Route path="/periodeavslutning/anleggsmidler" element={<AnleggsmiddelPage />} />
+          <Route path="/periodeavslutning/anleggsmidler/:id" element={<AnleggsmiddelPage />} />
         </Routes>
+        </Layout>
       </BrowserRouter>
     </QueryClientProvider>
   );

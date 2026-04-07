@@ -26,8 +26,22 @@ export function useKunder(params?: { page?: number; pageSize?: number }) {
   return useQuery({
     queryKey: ['kunder', params],
     queryFn: async () => {
-      const { data } = await apiClient.get<PagedResult<KundeDto>>('/kunder', { params });
-      return data;
+      const { data } = await apiClient.get<
+        | PagedResult<KundeDto>
+        | { data: KundeDto[]; totaltAntall: number; side: number; antall: number }
+      >('/kunder', { params });
+      // Normalize: API may return {data,totaltAntall,side,antall} instead of {items,totalCount,...}
+      if ('data' in data && !('items' in data)) {
+        const raw = data as { data: KundeDto[]; totaltAntall: number; side: number; antall: number };
+        return {
+          items: raw.data,
+          totalCount: raw.totaltAntall,
+          page: raw.side,
+          pageSize: raw.antall,
+          totalPages: raw.antall > 0 ? Math.ceil(raw.totaltAntall / raw.antall) : 0,
+        } as PagedResult<KundeDto>;
+      }
+      return data as PagedResult<KundeDto>;
     },
   });
 }

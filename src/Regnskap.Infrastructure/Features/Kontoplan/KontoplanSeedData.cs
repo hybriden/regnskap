@@ -167,6 +167,52 @@ public static class KontoplanSeedData
         };
     }
 
+    public static void Seed(Regnskap.Infrastructure.Persistence.RegnskapDbContext db)
+    {
+        if (db.Kontogrupper.Any()) return;
+
+        var grupper = HentKontogrupper();
+        db.Kontogrupper.AddRange(grupper);
+        db.SaveChanges();
+
+        var standardKontoer = HentStandardKontoer();
+        foreach (var k in standardKontoer)
+        {
+            var gruppe = grupper.First(g => g.Gruppekode == k.Gruppekode);
+            db.Kontoer.Add(new Konto
+            {
+                Id = Guid.NewGuid(),
+                Kontonummer = k.Kontonummer,
+                Navn = k.Navn,
+                NavnEn = k.NavnEn,
+                Kontotype = k.Kontotype,
+                KontogruppeId = gruppe.Id,
+                StandardAccountId = k.Kontonummer,
+                StandardMvaKode = k.StandardMvaKode,
+                ErSystemkonto = k.ErSystemkonto,
+                ErAktiv = true
+            });
+        }
+        db.SaveChanges();
+
+        var mvaKoder = HentStandardMvaKoder();
+        foreach (var m in mvaKoder)
+        {
+            db.MvaKoder.Add(new MvaKode
+            {
+                Id = Guid.NewGuid(),
+                Kode = m.Kode,
+                Beskrivelse = m.Beskrivelse,
+                BeskrivelseEn = m.BeskrivelseEn,
+                StandardTaxCode = m.StandardTaxCode,
+                Sats = m.Sats,
+                Retning = m.Retning,
+                ErAktiv = true
+            });
+        }
+        db.SaveChanges();
+    }
+
     private static Kontogruppe Gruppe(int kode, string navn, string navnEn, Kontotype type, Normalbalanse balanse)
     {
         return new Kontogruppe

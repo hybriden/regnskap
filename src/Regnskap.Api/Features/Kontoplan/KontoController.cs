@@ -8,7 +8,7 @@ namespace Regnskap.Api.Features.Kontoplan;
 
 [ApiController]
 [Authorize]
-[Route("api/v1/kontoer")]
+[Route("api/kontoer")]
 public class KontoController : ControllerBase
 {
     private readonly IKontoService _kontoService;

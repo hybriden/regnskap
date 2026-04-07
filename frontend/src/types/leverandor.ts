@@ -161,10 +161,12 @@ export interface LeverandorSokParams {
 }
 
 export interface LeverandorSokResultat {
-  data: LeverandorDto[];
-  totaltAntall: number;
+  items: LeverandorDto[];
+  totalCount: number;
   side: number;
   antall: number;
+  totalSider: number;
+  harNesteSide: boolean;
 }
 
 // --- Faktura DTOs ---

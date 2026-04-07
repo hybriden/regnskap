@@ -30,7 +30,7 @@ export default function LeverandorListePage() {
     setSokParams((prev) => ({ ...prev, side: nySide }));
   }
 
-  const totaleSider = resultat ? Math.ceil(resultat.totaltAntall / (sokParams.antall ?? 50)) : 0;
+  const totaleSider = resultat ? Math.ceil(resultat.totalCount / (sokParams.antall ?? 50)) : 0;
 
   return (
     <div style={{ padding: 24, maxWidth: 1200, margin: '0 auto' }}>
@@ -103,7 +103,7 @@ export default function LeverandorListePage() {
               </tr>
             </thead>
             <tbody>
-              {resultat?.data.map((lev) => (
+              {resultat?.items?.map((lev) => (
                 <tr
                   key={lev.id}
                   onClick={() => navigate(`/leverandor/${lev.id}`)}
@@ -153,7 +153,7 @@ export default function LeverandorListePage() {
                   </td>
                 </tr>
               ))}
-              {resultat?.data.length === 0 && (
+              {resultat?.items?.length === 0 && (
                 <tr>
                   <td colSpan={7} style={{ ...celleStil, textAlign: 'center', color: '#666' }}>
                     Ingen leverandorer funnet
@@ -174,7 +174,7 @@ export default function LeverandorListePage() {
                 Forrige
               </button>
               <span style={{ padding: '8px 12px' }}>
-                Side {sokParams.side ?? 1} av {totaleSider} ({resultat?.totaltAntall} leverandorer)
+                Side {sokParams.side ?? 1} av {totaleSider} ({resultat?.totalCount} leverandorer)
               </span>
               <button
                 onClick={() => handleSideEndring((sokParams.side ?? 1) + 1)}

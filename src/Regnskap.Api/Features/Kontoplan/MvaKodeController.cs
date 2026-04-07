@@ -8,7 +8,7 @@ namespace Regnskap.Api.Features.Kontoplan;
 
 [ApiController]
 [Authorize]
-[Route("api/v1/mva-koder")]
+[Route("api/mva-koder")]
 public class MvaKodeController : ControllerBase
 {
     private readonly IMvaKodeService _mvaKodeService;

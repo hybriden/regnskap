@@ -51,7 +51,10 @@ public enum BilagType
     Kreditnota,
 
     /// <summary>Korrigeringsbilag.</summary>
-    Korreksjon
+    Korreksjon,
+
+    /// <summary>Periodisering (accruals).</summary>
+    Periodisering
 }
 
 /// <summary>

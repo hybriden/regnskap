@@ -10,6 +10,8 @@ using Regnskap.Domain.Features.Kundereskontro;
 using Regnskap.Domain.Features.Leverandorreskontro;
 using Regnskap.Domain.Features.Bankavstemming;
 using Regnskap.Domain.Features.Fakturering;
+using Regnskap.Domain.Features.Rapportering;
+using Regnskap.Domain.Features.Periodeavslutning;
 
 namespace Regnskap.Infrastructure.Persistence;
 
@@ -70,12 +72,25 @@ public class RegnskapDbContext : DbContext
     public DbSet<FakturaNummerserie> FakturaNummerserie => Set<FakturaNummerserie>();
     public DbSet<Selskapsinfo> Selskapsinfo => Set<Selskapsinfo>();
 
+    // Rapportering
+    public DbSet<RapportKonfigurasjon> RapportKonfigurasjoner => Set<RapportKonfigurasjon>();
+    public DbSet<Budsjett> Budsjetter => Set<Budsjett>();
+    public DbSet<RapportLogg> RapportLogger => Set<RapportLogg>();
+
     // Kundereskontro
     public DbSet<Kunde> Kunder => Set<Kunde>();
     public DbSet<KundeFaktura> KundeFakturaer => Set<KundeFaktura>();
     public DbSet<KundeFakturaLinje> KundeFakturaLinjer => Set<KundeFakturaLinje>();
     public DbSet<KundeInnbetaling> KundeInnbetalinger => Set<KundeInnbetaling>();
     public DbSet<Purring> Purringer => Set<Purring>();
+
+    // Periodeavslutning
+    public DbSet<Anleggsmiddel> Anleggsmidler => Set<Anleggsmiddel>();
+    public DbSet<AvskrivningHistorikk> AvskrivningHistorikker => Set<AvskrivningHistorikk>();
+    public DbSet<Periodisering> Periodiseringer => Set<Periodisering>();
+    public DbSet<PeriodiseringsHistorikk> PeriodiseringsHistorikker => Set<PeriodiseringsHistorikk>();
+    public DbSet<PeriodeLukkingLogg> PeriodeLukkingLogger => Set<PeriodeLukkingLogg>();
+    public DbSet<ArsavslutningStatus> ArsavslutningStatuser => Set<ArsavslutningStatus>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
