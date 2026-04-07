@@ -4,7 +4,7 @@ Norsk regnskapssystem med full støtte for dobbelt bokholderi, SAF-T, MVA, EHF-f
 
 ## Tech Stack
 
-- **Backend:** ASP.NET Core 9 + EF Core 9 + PostgreSQL 16
+- **Backend:** ASP.NET Core 10 + EF Core 10 + PostgreSQL 16
 - **Frontend:** React 19 + TypeScript + Vite
 - **Architecture:** Modular monolith med feature folders
 - **External formats:** SAF-T XML, EHF/PEPPOL, CAMT.053, pain.001

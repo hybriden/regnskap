@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Regnskap.Api/Regnskap.Api.csproj" />
+    <Project Path="src/Regnskap.Application/Regnskap.Application.csproj" />
+    <Project Path="src/Regnskap.Domain/Regnskap.Domain.csproj" />
+    <Project Path="src/Regnskap.Infrastructure/Regnskap.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Regnskap.Tests/Regnskap.Tests.csproj" />
+  </Folder>
+</Solution>
