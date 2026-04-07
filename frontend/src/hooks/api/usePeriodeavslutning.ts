@@ -27,10 +27,22 @@ export function usePeriodeStatus(ar: number) {
   return useQuery({
     queryKey: ['periodeStatus', ar],
     queryFn: async () => {
-      const { data } = await apiClient.get<PeriodeStatusDto[]>(
-        `/periodeavslutning/${ar}/perioder`,
-      );
-      return data;
+      // Use hovedbok perioder endpoint and map to PeriodeStatusDto
+      const { data } = await apiClient.get<{ ar: number; perioder: Array<{
+        id: string; ar: number; periode: number; periodenavn: string;
+        status: string; lukketTidspunkt: string | null; lukketAv: string | null;
+      }> }>(`/perioder/${ar}`);
+      return (data.perioder ?? []).map((p): PeriodeStatusDto => ({
+        ar: p.ar,
+        periode: p.periode,
+        periodenavn: p.periodenavn,
+        status: p.status,
+        lukketTidspunkt: p.lukketTidspunkt,
+        lukketAv: p.lukketAv,
+        antallBilag: 0,
+        sumDebet: 0,
+        sumKredit: 0,
+      }));
     },
     enabled: ar > 0,
   });
